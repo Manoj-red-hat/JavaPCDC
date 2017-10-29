@@ -30,7 +30,7 @@ public class WaitNotify {
     };
 
     Runnable consumer = () -> {
-        IntStream.range(1, 11).forEach(x -> {
+        IntStream.range(1, 10).forEach(x -> {
             synchronized (eatingQueue) {
                 if (eatingQueue.size() == 0) {
                     try {
