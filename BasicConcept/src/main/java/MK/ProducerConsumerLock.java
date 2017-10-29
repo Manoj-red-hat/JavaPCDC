@@ -8,14 +8,16 @@ import java.util.stream.IntStream;
 
 public class ProducerConsumerLock {
     public Vector<Boolean> eatingQueue = new Vector<>(5, 2);
+
     Thread Producer;
     Thread Consumer;
-    Lock lk=new ReentrantLock();
+
+    Lock lk = new ReentrantLock();
+
     private final Condition bufferEmpty=lk.newCondition();
-    private final Condition bufferFull = lk.newCondition();
+    private final Condition bufferFull=lk.newCondition();
 
-    Runnable producer = () -> {
-
+    Runnable producer = () ->
         IntStream.range(1, 11).forEach(x -> {
                 lk.lock();
                 try {
@@ -31,12 +33,9 @@ public class ProducerConsumerLock {
                 } finally {
                     lk.unlock();
                 }
-
         });
 
-    };
-
-    Runnable consumer = () -> {
+    Runnable consumer = () ->
         IntStream.range(1, 10).forEach(x -> {
             lk.lock();
             try {
@@ -52,9 +51,7 @@ public class ProducerConsumerLock {
             } finally {
                 lk.unlock();
             }
-
         });
-    };
 
     ProducerConsumerLock(){
         Producer = new Thread(producer);
