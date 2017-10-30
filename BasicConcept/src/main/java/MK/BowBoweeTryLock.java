@@ -1,9 +1,30 @@
 package MK;
 
+import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class BowBoweeTryLock {
+    static class BowLoop implements Runnable {
+        private Friend bower;
+        private Friend bowee;
+
+        public BowLoop(Friend bower, Friend bowee) {
+            this.bower = bower;
+            this.bowee = bowee;
+        }
+
+        public void run() {
+            Random random = new Random();
+            for (int i=0;i<10;i++) {
+                try {
+                    Thread.sleep(random.nextInt(1));
+                } catch (InterruptedException e) {}
+                bowee.bow(bower);
+            }
+        }
+    }
+
     static class Friend {
         String name;
         private final Lock lock = new ReentrantLock();
