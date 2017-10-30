@@ -1,20 +1,26 @@
 package MK;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class ProducerConsumerLockTest {
-    @BeforeEach
-    void setUp() throws InterruptedException {
+/**
+ * Created by Manoj Kumar on 10/30/2017.
+ * Contact: manoj.kumar.mbm@gmail.com
+ */
+public class ProducerConsumerLockTest {
+    @Before
+    public void setUp() throws Exception {
         ProducerConsumerLock obj = new ProducerConsumerLock();
         obj.Producer.start();
         obj.Consumer.start();
         obj.Producer.join();
         obj.Consumer.join();
     }
+
     @Test
-    void producer() {
+    public void pro(){
+
     }
 }
