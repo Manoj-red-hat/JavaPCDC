@@ -1,6 +1,7 @@
 package MK;
 
 import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -18,7 +19,8 @@ public class ProducerConsumerLock {
     private final Condition bufferFull=lk.newCondition();
 
     Runnable producer = () ->
-        IntStream.range(1, 11).forEach(x -> {
+        IntStream.range(1, 4).forEach((int x) -> {
+            if(lk.tryLock()) {
                 lk.lock();
                 try {
                     if (eatingQueue.size() > 0) {
@@ -33,23 +35,26 @@ public class ProducerConsumerLock {
                 } finally {
                     lk.unlock();
                 }
+            }
         });
 
     Runnable consumer = () ->
         IntStream.range(1, 10).forEach(x -> {
-            lk.lock();
-            try {
-                if (eatingQueue.size() == 0) {
-                    bufferFull.await();
-                } else {
-                    eatingQueue.remove(0);
-                    System.out.println("Cooked Food consumed, Require More");
-                    bufferEmpty.signal();
+            if(lk.tryLock()) {
+                lk.lock();
+                try {
+                    if (eatingQueue.size() == 0) {
+                        bufferFull.await(10, TimeUnit.MILLISECONDS);
+                    } else {
+                        eatingQueue.remove(0);
+                        System.out.println("Cooked Food consumed, Require More");
+                        bufferEmpty.signal();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    lk.unlock();
                 }
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            } finally {
-                lk.unlock();
             }
         });
 

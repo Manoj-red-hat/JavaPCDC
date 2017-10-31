@@ -1,20 +1,24 @@
 package MK;
 
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 public class JoinTestTest {
     JoinTest obj;
 
-    @org.junit.jupiter.api.BeforeEach
+    @Before
     protected void setUp() {
         obj=new JoinTest();
     }
 
-    @org.junit.jupiter.api.AfterEach
+    @After
     protected void tearDown() {
         obj=null;
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void startThreadsInRandom() throws Exception{
         System.out.println("Thread executed with no delay ");
         obj.startThreadsInRandom();
@@ -24,7 +28,7 @@ public class JoinTestTest {
 
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void joinMilliSec() throws Exception{
         obj.JoinMilliSec();
         obj.alpha.start();

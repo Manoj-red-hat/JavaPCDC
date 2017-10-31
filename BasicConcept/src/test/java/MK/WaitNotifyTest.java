@@ -1,9 +1,7 @@
 package MK;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Before;
+import org.junit.Test;
 
 public class WaitNotifyTest {
     @Test
@@ -11,7 +9,7 @@ public class WaitNotifyTest {
     }
 
     WaitNotify obj;
-    @BeforeEach
+    @Before
     void setUp() throws InterruptedException {
         obj = new WaitNotify();
         obj.Producer.start();
