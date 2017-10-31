@@ -18,7 +18,7 @@ public class ProducerConsumerLock {
     private final Condition bufferFull=lk.newCondition();
 
     Runnable producer = () ->
-        IntStream.range(1, 4).forEach(x -> {
+        IntStream.range(1, 11).forEach(x -> {
                 lk.lock();
                 try {
                     if (eatingQueue.size() > 0) {
@@ -28,7 +28,6 @@ public class ProducerConsumerLock {
                         eatingQueue.add(true);
                         bufferFull.signal();
                     }
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
@@ -37,10 +36,10 @@ public class ProducerConsumerLock {
         });
 
     Runnable consumer = () ->
-        IntStream.range(1, 4).forEach(x -> {
+        IntStream.range(1, 10).forEach(x -> {
             lk.lock();
             try {
-            if (eatingQueue.size() == 0) {
+                if (eatingQueue.size() == 0) {
                     bufferFull.await();
                 } else {
                     eatingQueue.remove(0);

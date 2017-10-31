@@ -1,29 +1,69 @@
 package MK;
 
+/**
+ * Created by Manoj Kumar on 10/31/2017.
+ * Contact: manoj.kumar.mbm@gmail.com
+ */
 public class DoublyLinkedList {
-    private class node{
-        int value=0;
-        node(int i){
-            this.value=i;
+   private class Node {
+       int data;
+       Node next=null;
+       Node prev=null;
+       Node(int i){
+           this.data=i;
+       }
+   }
+
+   Node root=null;
+
+   public void addNode(int i){
+       Node newNode = new Node(i);
+    if(root==null){
+        root=newNode;
+    }else{
+        Node tmp;
+        tmp=root;
+        while(tmp.next != null){
+            tmp=tmp.next;
         }
-        node next=null;
-        node previous=null;
+        tmp.next=newNode;
+        newNode.prev=tmp;
     }
+   }
 
-    node root=null;
-    public node add(node x){
+   public void deleteNode(int i){
+       Node tmp;
+       tmp=root;
+       while(tmp!=null){
+           if(tmp.data == i) {
+               tmp.prev.next = tmp.next;
+               tmp.next.prev = tmp.prev;
+               break;
+           }
+           tmp=tmp.next;
+       }
+   }
 
-        node traverse;
-        if(this.root==null){
-            root=x;
-        }else{
-            traverse=root;
-            while(traverse.next!=null){
-                traverse=traverse.next;
+    public boolean Contains (int i){
+        Node tmp;
+        tmp=root;
+        while(tmp!=null){
+            if(tmp.data == i) {
+                return true;
             }
-            traverse.next=x;
-            x.previous=traverse;
+            tmp=tmp.next;
         }
-        return root;
+        return false;
     }
+
+   @Override
+   public String toString(){
+       StringBuffer sb=new StringBuffer();
+       Node trv=root;
+       while(trv!=null){
+           sb.append(trv.data+"->");
+           trv=trv.next;
+       }
+       return sb.toString();
+   }
 }
