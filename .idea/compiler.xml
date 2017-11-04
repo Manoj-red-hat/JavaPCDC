@@ -7,11 +7,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="BasicConcept" />
+        <module name="ConcurrentProgrammingConcept" />
+        <module name="ParallelProgrammingConcept" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="BasicConcept" target="1.8" />
+      <module name="ConcurrentProgrammingConcept" target="1.8" />
       <module name="JavaPCDC" target="1.8" />
+      <module name="mk" target="1.8" />
+      <module name="ParallelProgrammingConcept" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

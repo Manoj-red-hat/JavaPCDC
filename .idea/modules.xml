@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BasicConcept/BasicConcept.iml" filepath="$PROJECT_DIR$/BasicConcept/BasicConcept.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BasicConcept/ConcurrentProgrammingConcept.iml" filepath="$PROJECT_DIR$/BasicConcept/ConcurrentProgrammingConcept.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/JavaPCDC.iml" filepath="$PROJECT_DIR$/.idea/JavaPCDC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParallelProgrammingConcept/ParallelProgrammingConcept.iml" filepath="$PROJECT_DIR$/ParallelProgrammingConcept/ParallelProgrammingConcept.iml" />
     </modules>
   </component>
 </project>

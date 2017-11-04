@@ -1,5 +1,7 @@
 package MK;
 
+import static edu.rice.pcdp.PCDP.isolated;
+
 /**
  * Created by Manoj Kumar on 10/31/2017.
  * Contact: manoj.kumar.mbm@gmail.com
@@ -17,21 +19,24 @@ public class DoublyLinkedList {
    Node root=null;
 
    public void addNode(int i){
-       Node newNode = new Node(i);
-    if(root==null){
-        root=newNode;
-    }else{
-        Node tmp;
-        tmp=root;
-        while(tmp.next != null){
-            tmp=tmp.next;
-        }
-        tmp.next=newNode;
-        newNode.prev=tmp;
-    }
+       isolated(()-> {
+           Node newNode = new Node(i);
+           if (root == null) {
+               root = newNode;
+           } else {
+               Node tmp;
+               tmp = root;
+               while (tmp.next != null) {
+                   tmp = tmp.next;
+               }
+               tmp.next = newNode;
+               newNode.prev = tmp;
+           }
+       });
    }
 
    public void deleteNode(int i){
+       isolated(()->{
        Node tmp;
        tmp=root;
        while(tmp!=null){
@@ -41,10 +46,11 @@ public class DoublyLinkedList {
                break;
            }
            tmp=tmp.next;
-       }
+       }});
    }
 
     public boolean Contains (int i){
+
         Node tmp;
         tmp=root;
         while(tmp!=null){
